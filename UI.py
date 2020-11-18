@@ -17,6 +17,7 @@ class Window(Frame):
         quitButton = Button(self, text = "Quit", command=self.quit_command)
         # placing the button on my window
         quitButton.place(x = 0, y = 0)
+    #TODO try to add more buttons such that i can pass an array of objects in, and it will make more buttons for each object
         
     def quit_command(self):
         quit(0)
