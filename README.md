@@ -16,6 +16,6 @@ each button object should have
     description
     state
     position
-write to a file for saving data
+write to a file for saving data probably using pickle module
 each button is a line probably
     
