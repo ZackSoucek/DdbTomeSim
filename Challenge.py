@@ -26,7 +26,14 @@ class Challenge:
         self.description = description
     
     '''comparisons based on value'''
-    
+    def increment(self):
+        if self.state == State.INCOMPLETE:
+            self.state = State.COMPLETE
+        if self.state == State.COMPLETE:
+            self.state = State.CLAIMED
+        if self.state == State.CLAIMED:
+            self.state = State.INCOMPLETE
+
     def __lt__(self, other) -> bool:
         return self.value < other.value
     

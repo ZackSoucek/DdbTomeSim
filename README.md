@@ -18,4 +18,11 @@ each button object should have
     position
 write to a file for saving data probably using pickle module
 each button is a line probably
+
+
+for use in pathfind
+    traveling salesman
+    minnimum spannign tree
+    topological sort
+    floyds algorithm
     
