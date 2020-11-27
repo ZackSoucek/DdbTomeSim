@@ -1,5 +1,5 @@
 from tkinter import *
-from Challenge import  Challenge
+from Challenge import *
 import pickle
 
 
@@ -8,6 +8,8 @@ class Window(Frame):
         Frame.__init__(self, master)
         self.master = master
         self.init_window()
+        self.defaultChal = Challenge("", 0, 0, Side.BOTH, 0, (0, 0), "")\
+        #making a default to use in the event of empty
     
     # Creation of init_window
     def init_window(self):
@@ -40,9 +42,17 @@ class Window(Frame):
         # TODO actually get the challenges for the tome
         for i in range(len(challenges)):
             buttons.append(Button(self, text = challenges[i].name))
-            buttons[i].place(x = challenges[i].position[0], y = challenges[i].position[1])
-            buttons[i].bind("<Enter>", )
+            buttons[i].place(x = challenges[i].position[0], y = challenges[i].position[1],
+                             command = self.toggle_type(challenges[i]))
+            buttons[i].bind("<Enter>", self.update_hover_text(challenges[i]))
+            buttons[i].bind("<Leave>", self.update_hover_text(self.defaultChal))
             # places the button at its x and y pos
+            
+    def update_hover_text(self, chal: Challenge):
+        
+        
+        pass
+    
         
     def toggle_type(self, chal: Challenge):
         chal.increment()
