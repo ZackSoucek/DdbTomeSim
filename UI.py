@@ -1,14 +1,16 @@
 from tkinter import *
 from Challenge import *
 import pickle
+import Tooltip
 
 
 class Window(Frame):
     def __init__(self, master = None):
         Frame.__init__(self, master)
         self.master = master
+        self.defaultChal = Challenge("", 0, 0, Side.BOTH, 0, State.INCOMPLETE, (0, 0), "default chal description")
         self.init_window()
-        self.defaultChal = Challenge("", 0, 0, Side.BOTH, 0, (0, 0), "")\
+        
         #making a default to use in the event of empty
     
     # Creation of init_window
@@ -28,6 +30,10 @@ class Window(Frame):
         # TODO level switcher buttons
         #these will habe to run the button and challenge parseing
         level1 = open("Data\Baseline\Tome1\level1", 'rb')
+        # TODO actually get the challenges for the tome
+        
+        
+        #this part should load the whole current level into memory and create their buttons
         challenges = []
         buttons = []
         try:
@@ -39,22 +45,24 @@ class Window(Frame):
             # desired behavior is to do nothing and move on
             pass
         
-        # TODO actually get the challenges for the tome
         for i in range(len(challenges)):
-            buttons.append(Button(self, text = challenges[i].name))
-            buttons[i].place(x = challenges[i].position[0], y = challenges[i].position[1],
-                             command = self.toggle_type(challenges[i]))
-            buttons[i].bind("<Enter>", self.update_hover_text(challenges[i]))
-            buttons[i].bind("<Leave>", self.update_hover_text(self.defaultChal))
-            # places the button at its x and y pos
-            
-    def update_hover_text(self, chal: Challenge):
-        
-        
-        pass
-    
+            buttons.append(Button(self, text = challenges[i].name, command = lambda: self.toggle_type(challenges[i])))
+            buttons[i].place(x = challenges[i].position[0], y = challenges[i].position[1])
+            Tooltip.createToolTip(buttons[i], self.tooltipString(challenges[i]))
+    def tooltipString(self, chal: Challenge):
+        s = "Name: {name}\nSide: {side}\nValue: {value:,}\nState: {state}\nDescription: {descr}".format(
+            name = chal.name,
+            side = chal.side,
+            value = chal.value,
+            state = str(chal.state),
+            descr = chal.description
+        )
+        #WARNING_____________________________________________________________________
+        #this might end up with locking in the tooltip when placed, will need to change the tooltip or something when state changes
+        return s
         
     def toggle_type(self, chal: Challenge):
         chal.increment()
+        
     def quit_command(self):
         quit(0)

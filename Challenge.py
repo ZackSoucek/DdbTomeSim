@@ -5,12 +5,30 @@ class State(Enum):
     INCOMPLETE = auto()
     COMPLETE = auto()
     CLAIMED = auto()
-
+    def __str__(self):
+        if self.name == 'INCOMPLETE':
+            return "Incomplete"
+        elif self.name == 'CLAIMED':
+            return "Claimed"
+        elif self.name == 'COMPLETE':
+            return "Complete"
+        else:
+            return "Invalid State"
 
 class Side(Enum):
     SURVIVOR = auto()
     KILLER = auto()
     BOTH = auto()
+    def __str__(self):
+        if self.name == 'BOTH':
+            return "Both"
+        elif self.name == 'KILLER':
+            return "Killer"
+        elif self.name == 'SURVIVOR':
+            return "Survivor"
+        else:
+            return "Invalid Side"
+
 
 
 class Challenge:
@@ -29,9 +47,9 @@ class Challenge:
     def increment(self):
         if self.state == State.INCOMPLETE:
             self.state = State.COMPLETE
-        if self.state == State.COMPLETE:
+        elif self.state == State.COMPLETE:
             self.state = State.CLAIMED
-        if self.state == State.CLAIMED:
+        elif self.state == State.CLAIMED:
             self.state = State.INCOMPLETE
 
     def __lt__(self, other) -> bool:

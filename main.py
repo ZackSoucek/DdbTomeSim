@@ -4,15 +4,18 @@ from tkinter import *
 from UI import Window
 
 def main():
-    Creator
+    #Creator
 
     
     root = Tk()
     root.geometry("900x600")#window size by start
     app = Window(root)
-    root.mainloop()
-    
 
+    
+    # starts running the window
+    root.mainloop()
+
+    
 if __name__ == '__main__':
     main();
     #gonna create a few challenges and pickle them

@@ -1,4 +1,4 @@
-from Challenge import Challenge
+from Challenge import *
 import pickle
 #Tome 1 default generation
 #level 1
